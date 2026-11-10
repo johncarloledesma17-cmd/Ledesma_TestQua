@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard - TestQua</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/w3.css') }}">
+</head>
+<body class="w3-light-grey w3-mobile">
+
+    <!-- Consistent Navbar (Indigo & Teal) -->
+    <div class="w3-bar w3-indigo w3-card-2">
+        <span class="w3-bar-item w3-large"><b>TestQua System</b></span>
+        <a href="/logout" class="w3-bar-item w3-button w3-round w3-right w3-teal w3-margin-top w3-margin-bottom w3-margin-right">Logout</a>
+    </div>
+
+    <div class="w3-container w3-padding-32">
+        <!-- Consistent Card Design -->
+        <div class="w3-card-4 w3-white w3-round-large w3-padding-32 w3-center" style="max-width:600px; margin: 0 auto !important;">
+            <h1 class="w3-text-indigo"><b>Welcome, {{ name }}!</b></h1>
+            <hr class="w3-border-light-grey" style="width: 50%; margin: auto; margin-bottom: 20px;">
+            
+            <p class="w3-large">This is your protected dashboard.</p>
+            <p class="w3-text-grey">You have successfully authenticated and bypassed security checks.</p>
+            
+            <div class="w3-panel w3-pale-blue w3-leftbar w3-border-blue w3-padding w3-margin-top w3-round" style="text-align: left;">
+                <p class="w3-margin-0"><b>Security Test:</b> Try clicking "Logout" above, then pressing the browser's <b>Back</b> button. You should be blocked from viewing this page!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- THE BFCACHE FIX -->
+    <script>
+        window.addEventListener("pageshow", function (event) {
+            // If the page was loaded from the browser's back/forward cache
+            if (event.persisted) {
+                // Force a reload from the server (which will trigger the Python auth check)
+                window.location.reload();
+            }
+        });
+    </script>
+
+</body>
+</html>
